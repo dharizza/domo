@@ -1,0 +1,5 @@
+name: Hello World
+type: module
+description: Provee páginas para saludar a los usuarios.
+package: Custom
+core_version_requirement: ^9 || ^10

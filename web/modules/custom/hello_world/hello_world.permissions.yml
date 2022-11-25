@@ -1,0 +1,4 @@
+administer hello_world configuration:
+  title: 'Administer hello_world configuration'
+  description: 'Optional description.'
+  restrict access: true
