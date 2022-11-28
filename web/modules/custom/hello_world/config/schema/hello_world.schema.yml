@@ -1,0 +1,7 @@
+block.settings.hello_world_productos_api:
+  type: block_settings
+  label: 'Productos API block'
+  mapping:
+    foo:
+      type: string
+      label: Foo
