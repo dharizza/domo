@@ -12,18 +12,28 @@ class HelloWorldController extends ControllerBase {
   /**
    * Returns response with hello world text.
    */
-  public function hello() {
-    $user = $this->currentUser();
+  public function hello($name = NULL, $nid = NULL) {
+    if (!$name) {
+      $user = $this->currentUser();
+      $name = $user->getAccountName();
+    }
 
     $build['hello'] = [
-      '#markup' => '<h2>Hello ' . $user->getAccountName() . '!</h2>',
+      '#markup' => '<h2>Hello ' . $name . '!</h2>',
     ];
 
-    $build['examples_link'] = [
-      '#title' => $this->t('Examples'),
-      '#type' => 'link',
-      '#url' => \Drupal\Core\Url::fromRoute('<front>'),
-    ];
+    ksm($nid);
+    if ($nid && is_numeric($nid)) {
+      $node = \Drupal\node\Entity\Node::load($nid);
+      if ($node) {
+        $build['node_info'] = [
+          '#title' => $node->getTitle(),
+          '#type' => 'link',
+          // '#url' => \Drupal\Core\Url::fromRoute('entity.node.canonical', ['node' => $nid]),
+          '#url' => $node->toUrl(),
+        ];
+      }
+    }
 
     return $build;
   }
